@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  root to: redirect('/users/1')
+
+  resources :users, only: [:new, :create, :show]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
