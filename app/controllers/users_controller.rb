@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      #login stuff here
+      login_user!(@user)
 
       redirect_to user_url(@user.id)
     else
@@ -22,6 +22,10 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
 
-    render :profile_page
+    if current_user && @user.id == current_user.id
+      render :profile_page
+    else
+      render :forbidden
+    end
   end
 end
