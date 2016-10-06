@@ -22,11 +22,11 @@ class User < ActiveRecord::Base
     SecureRandom.urlsafe_base64
   end
 
-  def self.find_by_credentials(email, password)
-    possible_user = User.find_by_email(email)
-    return ["email address not found"] if possible_user.nil?
+  def self.find_by_credentials(options)
+    possible_user = User.find_by_email(options[:email])
+    return ["Email address not found!"] if possible_user.nil?
 
-    possible_user.is_password?(password) ? possible_user : ["incorrect password"]
+    possible_user.is_password?(options[:password]) ? possible_user : ["Incorrect password!"]
   end
 
   def reset_session_token!
@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
 
   def password=(password)
     @password = password
-    
+
     self.password_digest = BCrypt::Password.create(password)
   end
 
