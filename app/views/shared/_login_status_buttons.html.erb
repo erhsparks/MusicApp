@@ -1,12 +1,16 @@
 <font color="gray">
-<% if current_user %>
-  <label>
-    Logged in as: <%= current_user.email %><br><br>
-    <%= button_to "my profile", user_url(current_user.id), method: :get %>
-    <%= button_to "log out", session_url, method: :delete %>
-  </label>
-<% else %>
-  <%= button_to "log in", new_session_url, method: :get %>
-  <%= button_to "sign up", new_user_url, method: :get %>
-<% end %>
+  <% case request.original_url %>
+  <% when session_url, new_session_url, new_user_url %>
+  <% else %>
+    <% if current_user %>
+      <label>
+        Logged in as: <%= current_user.email %>
+        <%= button_to "log out", session_url, method: :delete %>
+        <%= button_to "my profile", user_url(current_user.id), method: :get %>
+      </label>
+    <% else %>
+      <%= button_to "log in", new_session_url, method: :get %>
+      <%= button_to "sign up", new_user_url, method: :get %>
+    <% end %>
+  <% end %>
 </font>

@@ -1,3 +1,5 @@
 <%= render "shared/email_and_password_form", user: @user, action: session_url %>
 
 <%= render "shared/errors" %>
+
+<p><%= link_to "<< Back", session_url %></p>

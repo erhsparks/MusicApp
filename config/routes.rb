@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: redirect('/bands')
 
   resources :users, only: [:create, :new, :show]
-  resource :session, only: [:create, :new, :destroy]
+  resource :session, only: [:show, :create, :new, :destroy]
 
   resources :bands
 
