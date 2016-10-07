@@ -6,12 +6,16 @@
 <h3><font color="green">Albums:</font></h3>
 <ul>
   <% @band.albums.each do |album| %>
-    <li><%= album.title %></li>
+    <li>
+      <%= link_to album.display_title, album_url(album) %>
+    </li>
   <% end %>
 </ul>
 
-<%= link_to "Add album", new_album_url %>
+<br>
 
-<br><br><br>
+<%= button_to "Add album", new_album_url, method: :get %>
 
-<%= button_to "Delete band!", band_url(@band), method: :delete %>
+<br><br>
+
+<%= button_to "Delete band O.O", band_url(@band), method: :delete %>

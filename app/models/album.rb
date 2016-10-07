@@ -12,6 +12,14 @@
 
 class Album < ActiveRecord::Base
   belongs_to :band
-  
   has_many :tracks
+
+  attr_reader :display_title
+
+  def display_title
+    title = self.title.to_s
+    title += " (Live)" if self.live
+
+    title
+  end
 end

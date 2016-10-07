@@ -1,0 +1,29 @@
+<br>
+
+<%= link_to "<< Back to all bands", bands_url %>
+
+<br><br>
+
+<%= link_to "<< Back to #{@album.band.name}", band_url(@album.band) %>
+
+<h2><font color="emerald">
+  <%= @album.band.name %> -
+  <%= @album.display_title %>
+</font> <font size=2>
+  <%= link_to "(edit album)", edit_album_url %>
+</font></h2>
+
+<h3><font color="green">Tracks:</font></h3>
+<ul>
+  <% @album.tracks.each do |track| %>
+    <li><%= link_to "#{track.name}", track_url(track) %></li>
+  <% end %>
+</ul>
+
+<br>
+
+<%= button_to "Add track", new_track_url, method: :get %>
+
+<br><br>
+
+<%= button_to "Delete album O.O", album_url(@album), method: :delete %>

@@ -8,20 +8,18 @@
 
 <br>
 
-<%= link_to "Add a band", new_band_url %>
+<%= button_to "Add a band", new_band_url, method: :get %>
 
-<br><br>
-
-
+<br>
 
 <h2><font color="green">All Albums</font></h2>
 
 <ul>
   <% Album.all.each do |album| %>
-    <li><%= link_to album.title, album_url(album) %> by <%= link_to album.band.name, band_url(album.band) %></li>
+    <li><%= link_to album.display_title, album_url(album) %> by <%= link_to album.band.name, band_url(album.band) %></li>
   <% end %>
 </ul>
 
 <br>
 
-<%= link_to "Add an album", new_album_url %>
+<%= button_to "Add an album", new_album_url, method: :get %>

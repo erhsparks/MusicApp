@@ -1,7 +1,7 @@
 <% url = band.persisted? ? band_url(band) : bands_url %>
 <% method = band.persisted? ? "PATCH" : "POST" %>
 
-<h2><%= band.name ? band.name : "Add a band" %></h2>
+<h2><font color="emerald"><%= band.name ? band.name : "Add a band" %></font></h2>
 
 <form action="<%= url %>"
       method="POST">
@@ -14,7 +14,7 @@
          name="authenticity_token"
          value="<%= form_authenticity_token %>">
 
-  <label for="band_name">Band name:</label>
+  <label for="band_name"><font color="emerald">Band name:</font></label>
   <input id="band_name"
          type="text"
          name="band[name]"
@@ -22,6 +22,9 @@
 
   <input type="submit"
          value="<%= band.name ? "Update!" : "Add band!" %>">
+
 </form>
 
-<%= button_to "Cancel", bands_url %>
+<br>
+
+<%= button_to "Cancel", bands_url, method: :get %>

@@ -1,1 +1,66 @@
+<% url = album.persisted? ? album_url(album) : albums_url %>
+<% method = album.persisted? ? "PATCH" : "POST" %>
 
+<h2><font color="emerald"><%= album.title ? album.title : "Add an album" %></font></h2>
+
+<form action="<%= url %>"
+      method="POST">
+
+  <input type="hidden"
+         name="_method"
+         value="<%= method %>">
+
+  <input type="hidden"
+         name="authenticity_token"
+         value="<%= form_authenticity_token %>">
+
+  <font color="green">
+  <label for="albums_band">Band:</label>
+  <select id="albums_band"
+          name="album[band_id]">
+    <% Band.all.each do |band| %>
+      <option value="<%= band.id %>"
+      <%= "selected" if band.id == album.band_id %>>
+        <%= band.name %>
+      </option>
+    <% end %>
+  </select>
+  </font>
+
+  <br><br>
+
+  <font color="emerald">
+  <label for="album_title">Album title:</label>
+  <input id="album_title"
+         type="text"
+         name="album[title]"
+         value="<%= album.title %>">
+  </font>
+
+  <br><br>
+
+  <font color="blue">
+  <label for="live">Live</label>
+  <input id="live"
+         type="radio"
+         name="album[live]"
+         value="true"
+         <%= "checked" if album.live %>>
+
+  <label for="studio">Studio</label>
+  <input id="studio"
+         type="radio"
+         name="album[live]"
+         value="false"
+         <%= "checked" if !album.live %>>
+  </font>
+
+  <br><br>
+
+  <input type="submit"
+         value="<%= album.title ? "Update!" : "Add album!" %>">
+</form>
+
+<br>
+
+<%= button_to "Cancel", band_url(album.band), method: :get %>
