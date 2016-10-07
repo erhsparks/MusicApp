@@ -11,6 +11,8 @@
 #
 
 class Album < ActiveRecord::Base
+  validates :title, :live, :band_id, presence: true
+
   belongs_to :band
   has_many :tracks
 

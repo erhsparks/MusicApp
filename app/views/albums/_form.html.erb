@@ -18,6 +18,7 @@
   <label for="albums_band">Band:</label>
   <select id="albums_band"
           name="album[band_id]">
+      <option value=nil <%= "selected" if album.band_id.nil? %>""</option>
     <% Band.all.each do |band| %>
       <option value="<%= band.id %>"
       <%= "selected" if band.id == album.band_id %>>
@@ -63,4 +64,5 @@
 
 <br>
 
-<%= button_to "Cancel", band_url(album.band), method: :get %>
+<% method = album.band_id.nil? ? bands_url : band_url(album.band_id) %>
+<%= button_to "Cancel", method , method: :get %>

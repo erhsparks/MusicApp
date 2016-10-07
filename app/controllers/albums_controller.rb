@@ -2,7 +2,12 @@ class AlbumsController < ApplicationController
   before_action :require_login
 
   def new
-    @album = Album.new
+    if params[:band_id]
+      @band = Band.find(params[:band_id])
+      @album = Album.new(band_id: @band.id)
+    else
+      @album = Album.new
+    end
 
     render :new
   end
