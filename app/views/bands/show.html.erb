@@ -1,0 +1,15 @@
+<br>
+<%= link_to "<< Back to all bands", bands_url %>
+
+<h2><font color="emerald"><%= @band.name %></font> <font size=2><%= link_to "(edit)", edit_band_url %></font></h2>
+
+<h3><font color="green">Albums:</font></h3>
+<ul>
+  <% @band.albums.each do |album| %>
+    <li><%= album.title %></li>
+  <% end %>
+</ul>
+
+<%= link_to "Add album", new_album_url %>
+
+<br><br><br>

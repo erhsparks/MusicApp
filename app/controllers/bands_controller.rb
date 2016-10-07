@@ -5,20 +5,50 @@ class BandsController < ApplicationController
   end
 
   def new
+    @band = Band.new
+
+    render :new
   end
 
   def create
-  end
+    @band = Band.new(band_params)
 
-  def edit
+    if @band.save
+      redirect_to band_url(@band)
+    else
+      flash[:errors] = @band.errors.full_messages
+
+      render :new
+    end
   end
 
   def show
+    @band = Band.find(params[:id])
+
+    render :show
+  end
+
+  def edit
+    @band = Band.find(params[:id])
+
+    render :edit
   end
 
   def update
+    band = Band.find(params[:id])
+    band.update(band_params)
+
+    redirect_to band_url(band)
   end
 
   def destroy
+    Band.delete(@band)
+
+    redirect_to bands_url
+  end
+
+  private
+  def band_params
+    params.require(:band).permit(:name)
   end
 end
